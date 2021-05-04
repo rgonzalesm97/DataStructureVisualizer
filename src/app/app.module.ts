@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { HeaderMenuComponent } from './shared/header-menu/header-menu.component';
 import { FooterMenuComponent } from './shared/footer-menu/footer-menu.component';
 
+// PrimeNG
+import {MenubarModule} from 'primeng/menubar';
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +18,9 @@ import { FooterMenuComponent } from './shared/footer-menu/footer-menu.component'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MenubarModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
