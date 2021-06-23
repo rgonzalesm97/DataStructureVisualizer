@@ -1,0 +1,33 @@
+.arrow{
+    width: 60px;
+    height: 30px;
+    position: relative;
+    transform-origin: left;
+}
+.line{
+    background-color: var(--indigo-600);
+    height: 5px;
+    border-radius: 3px;
+}
+.horizontal{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.sideUp{
+    width: 20px;
+    position: absolute;
+    transform: rotate(45deg) translateY(-50%);
+    transform-origin: 50% 50%;
+    top: 25%;
+    right: 0;
+}
+.sideDown{
+    width: 20px;
+    position: absolute;
+    transform: rotate(-45deg) translateY(-50%);
+    transform-origin: 50% -50%;
+    top: 75%;
+    right: 0;
+}

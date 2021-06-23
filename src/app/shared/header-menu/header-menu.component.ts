@@ -16,7 +16,7 @@ export class HeaderMenuComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
-        label: '<h2>Data Structure<br>Visualizer</h2>',
+        label: '<h2>Linked List<br>Visualizer</h2>',
         escape: false,
       },
       {

@@ -1,8 +1,24 @@
-<div class="p-grid" style="width: 60px; height: 40px; border: 1px solid black">
-    <div class="p-col-8" style="border-right: 2px solid black;">
+
+<div class="nodeBoxComponent p-grid" [@nodeAnims]="nodeStates[nodeIndex]" >
+    <div class="headText" *ngIf="nodeIndex === 0">
+        <h4 class="nodeHeadText">Head</h4>
+        <app-arrow id="headArrow"></app-arrow>
+    </div>
+
+    <div class="value p-col-8">
         {{nodeValue}}
     </div>
-    <div class="p-col-4">
-        n
+
+    <div class="separator">
     </div>
+
+    <div class="next p-col-4">
+        
+    </div>
+
+    <div class="nodeIndex p-col-12 text-center">
+        {{nodeIndex}}
+    </div>
+    
 </div>
+

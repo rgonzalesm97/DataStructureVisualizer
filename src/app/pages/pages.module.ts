@@ -5,6 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { LinkedListComponent } from './linked-list/linked-list.component';
 import { FormsModule } from '@angular/forms';
 import { NodeBoxComponent } from './components/node-box/node-box.component';
+import { ArrowComponent } from './components/arrow/arrow.component';
 
 
 
@@ -14,7 +15,8 @@ import { NodeBoxComponent } from './components/node-box/node-box.component';
 @NgModule({
   declarations: [
     LinkedListComponent,
-    NodeBoxComponent
+    NodeBoxComponent,
+    ArrowComponent
   ],
   imports: [
     CommonModule,

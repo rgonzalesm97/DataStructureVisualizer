@@ -2,7 +2,11 @@
 
     <div class="p-d-flex p-ai-center p-jc-center" style="height: 100%;">
         <div class="p-d-flex p-ai-center p-jc-center">
-            <app-node-box [nodeValue]="nodeValue" *ngFor="let nodeValue of llArray, index as i" style="margin: 0px 10px;" @fade></app-node-box>
+            <div *ngFor="let nodeValue of llArray, index as i" style="margin: 0px 30px; position: relative;" >
+                <app-node-box [nodeValue]="nodeValue" [nodeIndex]="i" [nodeStates]="nodeStates"></app-node-box>
+                <app-arrow style="position: absolute; top: 15%; left: 85%; transform-origin: 0% 50%;" [arrowIndex]="i" [arrowStates]="arrowStates"></app-arrow>
+            </div>
+            <h5 style="font-weight: bolder; color: var(--bluegray-600); margin-left: 20px;">NULL</h5>
         </div>
     </div>
 
@@ -30,26 +34,26 @@
                     <div class="col-md-3 px-4">
                         <h3 class="mb-4">Insertions:</h3>
                         <div class="row mb-3">
-                            <button class="btn btn-primary" (click)="insertHead()">Insert at Head</button>
+                            <button class="btn btn-primary" (click)="insertHead()" [disabled]="btnDis">Insert at Head</button>
                         </div>
                         <div class="row mb-3">
-                            <button class="btn btn-primary" (click)="insertIndex()">Insert at Index</button>
+                            <button class="btn btn-primary" (click)="insertIndex()" [disabled]="btnDis">Insert at Index</button>
                         </div>
                         <div class="row mb-2">
-                            <button class="btn btn-primary" (click)="insertLast()">Insert at Last</button>
+                            <button class="btn btn-primary" (click)="insertLast()" [disabled]="btnDis">Insert at Last</button>
                         </div>
                     </div>
 
                     <div class="col-md-3 px-4">
                         <h3 class="mb-4">Deletions:</h3>
                         <div class="row mb-3">
-                            <button class="btn btn-dark" (click)="deleteHead()">Delete at Head</button>
+                            <button class="btn btn-dark" (click)="deleteHead()" [disabled]="btnDis">Delete at Head</button>
                         </div>
                         <div class="row mb-3">
-                            <button class="btn btn-dark" (click)="deleteIndex()">Delete at Index</button>
+                            <button class="btn btn-dark" (click)="deleteIndex()" [disabled]="btnDis">Delete at Index</button>
                         </div>
                         <div class="row mb-2">
-                            <button class="btn btn-dark" (click)="deleteLast()">Delete at Last</button>
+                            <button class="btn btn-dark" (click)="deleteLast()" [disabled]="btnDis">Delete at Last</button>
                         </div>
                     </div>
 
@@ -61,7 +65,7 @@
                                 <input type="text" name="value" class="form-control" [(ngModel)]="values" placeholder="10,20,30,...">
                                 <span class="form-text">Insert ONLY numbers separated with comas, no spaces in between.</span>
                             </div>
-                            <button class="btn btn-success" type="submit">Create new Linked List</button>
+                            <button class="btn btn-success" type="submit" [disabled]="btnDis">Create new Linked List</button>
                         </form>
                     </div>
             </div>

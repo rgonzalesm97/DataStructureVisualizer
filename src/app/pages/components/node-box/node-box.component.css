@@ -1,0 +1,41 @@
+.nodeBoxComponent{
+    width: 100px; 
+    height: 60px; 
+    border: 2px solid var(--orange-500);
+    border-radius: 5px; 
+    position: relative
+}
+
+.nodeHeadText{
+    color: var(--cyan-600);
+    font-weight: bolder;
+    position: absolute; top: -120%;
+}
+
+.separator{
+    width: 2px;
+    height: 100%;
+    background-color: var(--orange-500);
+}
+
+.value{
+    text-align: center;
+    font-weight: bolder;
+    color: var(--cyan-600);
+    font-size: x-large;
+}
+
+.next{
+    width: 33%;
+}
+.nodeIndex{
+    font-size: large;
+    font-weight: bolder;
+    color: var(--bluegray-400);
+}
+
+#headArrow{
+    position: absolute;
+    transform: rotate(90deg) scaleX(.6);
+    top: -66%;
+}

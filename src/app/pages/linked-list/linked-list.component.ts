@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from "@angular/animations";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Optional } from '@angular/core';
 import { LinkedList } from '../../dataStructures/linkedList';
 
 @Component({
@@ -10,33 +8,13 @@ import { LinkedList } from '../../dataStructures/linkedList';
     #allContainer{
       height: 100vh;
     }
-  `
-  ],
-  //Este es del argentino, este es el codigo base con el que comparar
-  /* animations: [
-    trigger('buton', [
-      state('amarillo', style({
-        backgroundColor: '#ffff00',
-      })),
-      state('rojo', style({
-        backgroundColor: '#ff0000',
-      })),
-      transition('amarillo => rojo', animate('500ms linear')),
-      transition('rojo => amarillo', animate('500ms linear'))
-    ])
-  ] */
-
-  //Este es de mosh
-  animations: [
-    trigger('fade', [
-      state('void', style({opacity: 0})),
-      transition(':enter, :leave', [
-        animate(1000)
-      ])
-    ])
-  ]
+  `],
+  
 })
 export class LinkedListComponent implements OnInit {
+
+  nodeStates: string[] = [];
+  arrowStates: string[] = [];
 
   ll!: LinkedList;
   llArray: any[] = [];
@@ -46,12 +24,17 @@ export class LinkedListComponent implements OnInit {
 
   values!: string;
 
+  isDisable: boolean = false;
+  btnDis:boolean = false;
+
 
   constructor() { }
 
   ngOnInit(): void {
     this.ll = LinkedList.prototype.fromValues(10, 20, 30);
     this.updateLL();
+    this.nodeStates = this.llArray.map(() => 'default');
+    this.arrowStates = this.llArray.map(() => 'default');
   }
 
   createNewLinkedList(){
@@ -62,6 +45,7 @@ export class LinkedListComponent implements OnInit {
       }
       this.ll = LinkedList.prototype.fromValues(...valuesArray!);
       this.updateLL();
+      this.nodeStates = this.llArray.map(() => 'default');
     }
   }
 
@@ -70,35 +54,93 @@ export class LinkedListComponent implements OnInit {
     if(this.checkForm()){
       this.ll.insertAtHead(this.value);
       this.updateLL();
+      this.nodeStates.unshift('in');
+      this.arrowStates.unshift('in');
+      //TODO animation for head title
+      this.btnDis = true;
+      setTimeout(() => {
+        this.nodeStates[0] = 'default';
+        this.arrowStates[0] = 'default';
+        this.btnDis = false;
+      }, 4000);
     }
   }
   insertIndex(){
     if(this.checkForm(false)){
       this.ll.insertAtIndex(this.index, this.value);
       this.updateLL();
+      this.nodeStates.splice(this.index, 0, 'in');
+      this.arrowStates.splice(this.index, 0, 'in');
+      if(this.index - 1 >= 0) this.arrowStates[this.index - 1] = 'previousin';
+      this.btnDis = true;
+      setTimeout(() => {
+        this.nodeStates[this.index] = 'default';
+        this.arrowStates[this.index] = 'default';
+        if(this.index - 1 >= 0) this.arrowStates[this.index - 1] = 'default';
+        this.btnDis = false;
+      }, 4000);
     }
   }
   insertLast(){
     if(this.checkForm()){
       this.ll.insertAtLast(this.value);
       this.updateLL();
+      this.nodeStates.push('in');
+      this.arrowStates.push('in');
+      this.arrowStates[this.arrowStates.length - 2] = 'previousin';
+      this.btnDis = true;
+      setTimeout(() => {
+        this.nodeStates[this.nodeStates.length - 1] = 'default';
+        this.arrowStates[this.arrowStates.length - 1] = 'default';
+        this.arrowStates[this.arrowStates.length - 2] = 'default';
+        this.btnDis = false;
+      }, 4000);
     }
   }
 
   //DELETIONS
   deleteHead(){
     this.ll.removeHead();
-    this.updateLL();
+    this.nodeStates[0] = 'out';
+    this.arrowStates[0] = 'out';
+    this.btnDis = true;
+    setTimeout(() => {
+      this.updateLL();
+      this.nodeStates.shift();
+      this.arrowStates.shift();
+      this.btnDis = false;
+    }, 4000);
+    
   }
   deleteIndex(){
     if(this.index >= 0 && this.index < this.llArray.length){
       this.ll.removeAtIndex(this.index);
-      this.updateLL();
+      this.nodeStates[this.index] = 'out';
+      this.arrowStates[this.index] = 'out';
+      if(this.index - 1 >= 0) this.arrowStates[this.index - 1] = 'previousout';
+      this.btnDis = true;
+      setTimeout(() => {
+        this.updateLL();
+        this.nodeStates.splice(this.index, 1);
+        this.arrowStates.splice(this.index, 1);
+        if(this.index - 1 >= 0) this.arrowStates[this.index - 1] = 'default';
+        this.btnDis = false;
+      }, 4000);
     }
   }
   deleteLast(){
     this.ll.removeAtLast();
-    this.updateLL();
+    this.nodeStates[this.nodeStates.length - 1] = 'out';
+    this.arrowStates[this.nodeStates.length - 1] = 'out';
+    this.arrowStates[this.nodeStates.length - 2] = 'previousout';
+    this.btnDis = true;
+    setTimeout(() => {
+      this.updateLL();
+      this.nodeStates.pop();
+      this.arrowStates.pop();
+      this.arrowStates[this.nodeStates.length - 1] = 'default';
+      this.btnDis = false;
+    }, 4000);
   }
 
   
